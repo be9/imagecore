@@ -1,10 +1,4 @@
-require 'mkmf'
-
-# not valid for C++ code
-$warnflags = ($warnflags.split - %w(-Wdeclaration-after-statement -Wimplicit-function-declaration)) * ' '
-
-# OpenCV includes
-$INCFLAGS << ' -I ../include'
+require File.expand_path('../../../extconf_common', __FILE__)
 
 # Find stuff
 if have_library('jpeg')
@@ -24,5 +18,4 @@ if have_library('jasper')
 end
 
 create_header('cvconfig.h')
-
 create_makefile("opencv_highgui")

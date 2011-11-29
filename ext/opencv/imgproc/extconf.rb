@@ -1,11 +1,4 @@
-require 'mkmf'
-
-# not valid for C++ code
-$warnflags = ($warnflags.to_s.split - %w(-Wdeclaration-after-statement -Wimplicit-function-declaration)) * ' '
-
-# OpenCV includes
-$INCFLAGS << ' -I ../include'
+require File.expand_path('../../../extconf_common', __FILE__)
 
 create_header('cvconfig.h')
-
 create_makefile("opencv_imgproc")

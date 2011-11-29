@@ -1,9 +1,3 @@
-require 'mkmf'
-
-# not valid for C++ code
-$warnflags = ($warnflags.split - %w(-Wdeclaration-after-statement -Wimplicit-function-declaration)) * ' '
-
-# OpenCV includes
-$INCFLAGS << ' -I ../opencv/include'
+require File.expand_path('../../extconf_common', __FILE__)
 
 create_makefile("imagecore")
