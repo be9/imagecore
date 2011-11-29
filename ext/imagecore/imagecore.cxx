@@ -2,28 +2,33 @@
 #include <stdio.h>
 #include "analyze_image.h"
 
-static VALUE rb_cImageCore;
-
-static VALUE analyze(VALUE klass, VALUE filename)
+static VALUE analyze(VALUE klass, VALUE filename, VALUE thresh)
 {
-//  fprintf(stderr, "klass type %d filename type %d\n", TYPE(klass), TYPE(filename));
-
   Check_Type(filename, T_STRING);
+  Check_Type(thresh, T_FIXNUM);
 
   char *fn = StringValueCStr(filename);
 
-  int threshold = 150;
+  int threshold = NUM2INT(thresh);
   int tlx, tly, brx, bry;
 
-  bool res = image_core_analyze_image(fn, threshold, tlx, tly, brx, bry);
+  if (image_core_analyze_image(fn, threshold, tlx, tly, brx, bry)) {
+    VALUE arr = rb_ary_new();
 
-  fprintf(stderr, "image_core_analyze_image returned %d\n", res);
+    rb_ary_push(arr, INT2FIX(tlx));
+    rb_ary_push(arr, INT2FIX(tly));
+    rb_ary_push(arr, INT2FIX(brx));
+    rb_ary_push(arr, INT2FIX(bry));
 
-  return Qnil;
+    return arr;
+  } else
+    return Qnil;
 }
 
 extern "C" void Init_imagecore()
 {
-  rb_cImageCore = rb_define_class("ImageCore", rb_cObject);
-  rb_define_singleton_method(rb_cImageCore, "analyze", (VALUE(*)(ANYARGS))analyze, 1);
+  VALUE module = rb_const_get(rb_cObject, rb_intern("ImageCore"));
+  VALUE klass = rb_define_class_under(module, "Ext", rb_cObject);
+
+  rb_define_singleton_method(klass, "analyze", (VALUE(*)(ANYARGS))analyze, 2);
 }

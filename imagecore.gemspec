@@ -4,8 +4,8 @@ require File.expand_path('../lib/imagecore/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["oleg dashevskii"]
   gem.email         = ["olegdashevskii@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Determine the core of an image file, stripping any borders}
+  gem.summary       = %q{Get image file core}
   gem.homepage      = ""
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
@@ -13,5 +13,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "imagecore"
   gem.require_paths = ["lib"]
-  gem.version       = Imagecore::VERSION
+  gem.version       = ImageCore::VERSION
+
+  gem.extensions    = %w(ext/opencv/core/extconf.rb ext/opencv/imgproc/extconf.rb
+                         ext/opencv/highgui/extconf.rb ext/imagecore/extconf.rb)
 end

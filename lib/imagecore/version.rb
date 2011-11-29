@@ -1,3 +1,3 @@
-module Imagecore
+module ImageCore
   VERSION = "0.0.1"
 end
