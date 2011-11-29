@@ -4,11 +4,6 @@ require 'mkmf'
 $warnflags = ($warnflags.split - %w(-Wdeclaration-after-statement -Wimplicit-function-declaration)) * ' '
 
 # OpenCV includes
-$INCFLAGS << ' -I OpenCV'
-
-# Sources
-$srcs = %w(analyze_image.cxx imagecore.cxx)
-
-dir_config("imagecore")
+$INCFLAGS << ' -I ../opencv/include'
 
 create_makefile("imagecore")

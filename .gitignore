@@ -19,3 +19,4 @@ tmp
 *.so
 *.sw?
 ext/imagecore/Makefile
+cvconfig.h

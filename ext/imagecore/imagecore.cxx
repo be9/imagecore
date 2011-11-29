@@ -17,6 +17,7 @@ static VALUE analyze(VALUE klass, VALUE filename)
 
   bool res = image_core_analyze_image(fn, threshold, tlx, tly, brx, bry);
 
+  fprintf(stderr, "image_core_analyze_image returned %d\n", res);
 
   return Qnil;
 }
