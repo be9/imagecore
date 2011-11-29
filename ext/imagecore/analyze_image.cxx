@@ -18,6 +18,9 @@ bool image_core_analyze_image(const char *filename, int threshold, int &tlx, int
   if (!src.data)
     return false;
 
+  cvtColor( src, src_gray, CV_BGR2GRAY );
+  blur( src_gray, src_gray, Size(3,3) );
+
   return true;
 }
 
