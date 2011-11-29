@@ -20,3 +20,5 @@ tmp
 *.sw?
 ext/imagecore/Makefile
 cvconfig.h
+mkmf.log
+Makefile
