@@ -30,6 +30,9 @@ bool image_core_analyze_image(const char *filename, int thresh,
   findContours(threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE,
                Point(0, 0));
 
+  if (contours.size() == 0)
+    return false;
+
   vector<Rect> boundRect(contours.size());
   vector<Point> allcontours;
   unsigned enclosing = -1;
